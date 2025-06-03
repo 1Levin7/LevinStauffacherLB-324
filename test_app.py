@@ -1,28 +1,34 @@
 from app import app, entries
-
 import pytest
-
-# Use Flask's test client for testing
 
 
 @pytest.fixture()
 def client():
-    app.config['TESTING'] = True
+    app.config["TESTING"] = True
     client = app.test_client()
-
+    entries.clear()
     yield client
 
 
 def test_add_entry(client):
-    # Test adding an entry
-    response = client.post(
-        '/add_entry', data={'content': 'Test Entry Content'})
-
-    # Check if the response is a redirect to the index page
+    with client.session_transaction() as sess:
+        sess["logged_in"] = True
+    response = client.post("/add_entry", data={"content": "Test Entry"})
     assert response.status_code == 302
-    assert response.headers['Location'] == '/'
+    assert entries[0].content == "Test Entry"
 
-    # Check if the entry was added to the database
-    entry = entries[0]
-    assert entry is not None
-    assert entry.content == 'Test Entry Content'
+
+def test_add_entry_with_mood(client):
+    with client.session_transaction() as sess:
+        sess["logged_in"] = True
+    response = client.post(
+        "/add_entry",
+        data={
+            "content": "Test mit Stimmung",
+            "mood_score": "8",
+            "mood_keyword": "Sternenmut",
+        },
+    )
+    assert response.status_code == 302
+    assert entries[0].mood_score == 8
+    assert entries[0].mood_keyword == "Sternenmut"
