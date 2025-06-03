@@ -5,70 +5,86 @@
     <title>My Diary</title>
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f3f6f9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f7;
             margin: 0;
-            padding: 0;
-            color: #333;
+            color: #1d1d1f;
         }
 
         .container {
-            max-width: 700px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            max-width: 760px;
+            margin: 60px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
         }
 
         h1, h2 {
             text-align: center;
-            color: #0057b8;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        a.logout {
+            float: right;
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        form {
+            margin-top: 30px;
         }
 
         textarea, input[type="text"], input[type="range"] {
             width: 100%;
-            padding: 10px;
+            padding: 14px;
             margin-top: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9f9fa;
+        }
+
+        input[type="range"] {
+            height: 4px;
+            background: #0071e3;
         }
 
         button {
-            background: #0057b8;
-            color: white;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
             width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out;
         }
 
         button:hover {
-            background: #003f88;
+            background-color: #005bb5;
         }
 
         ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
 
         li {
-            background: #e6f0ff;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .logout {
-            float: right;
-            font-size: 0.9em;
+            background-color: #f1f1f3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 16px;
         }
 
         .entry-label {
-            font-weight: bold;
-            margin-top: 10px;
+            font-weight: 500;
+            color: #6e6e73;
         }
     </style>
 </head>
@@ -77,7 +93,7 @@
         <h1>My Diary</h1>
 
         {% if session.logged_in %}
-        <h2>Willkommen zurück!</h2>
+        <h2>Schön, dass du wieder da bist!</h2>
         <a href="/logout" class="logout">Logout</a>
 
         <form method="POST" action="/add_entry">
@@ -87,7 +103,7 @@
             <input type="range" name="mood_score" min="1" max="10" value="5">
 
             <label class="entry-label">Wort des Tages</label>
-            <input type="text" name="mood_keyword" placeholder="z. B. Abenteuer, Gelassenheit...">
+            <input type="text" name="mood_keyword" placeholder="z. B. Fokus, Inspiration, Ruhe...">
 
             <button type="submit">Eintrag speichern</button>
         </form>
@@ -106,7 +122,7 @@
 
         {% else %}
         <h2>Bitte logge dich ein, um dein Tagebuch zu sehen:</h2>
-        <a href="/login"><button>Zum Login</button></a>
+        <a href="/login"><button>Login</button></a>
         {% endif %}
     </div>
 </body>
