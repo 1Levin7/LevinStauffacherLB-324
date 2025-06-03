@@ -26,5 +26,10 @@ python -m pre_commit install --> erwartetes ergebniss --> pre-commit installed a
 ## Manuelle Ausführung¨
 python -m pre_commit run --all-files
 
+## GitHub Actions
+
+Bei jedem Pull Request auf den `dev`-Branch wird automatisch eine Test-Action ausgeführt.  
+Diese prüft, ob die Applikation korrekt läuft.
+
 ## Aufgabe 4
 Erklären Sie hier, wie Sie das Passwort aus Ihrer lokalen `.env` auf Azure übertragen.
