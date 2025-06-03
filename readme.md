@@ -49,3 +49,36 @@ Die lokale Datei `.env` enthält sensible Umgebungsvariablen wie das `PASSWORD`.
    ```yaml
    - name: Set environment file
      run: echo "PASSWORD=${{ secrets.PASSWORD }}" > .env
+
+
+### Konfiguration der Umgebungsvariable in Azure
+
+Damit das Einschreiben funktioniert, muss die Umgebungsvariable `PASSWORD` korrekt gesetzt sein:
+
+1. Im Azure Portal die Web App öffnen
+2. Unter „Configuration“ → „Application settings“
+3. Neue Variable hinzufügen:  
+   - Name: `PASSWORD`  
+   - Value: `LevinStauffacher` (GitHub-Benutzername)
+4. Änderungen speichern und Neustart zulassen
+
+## Live-Demo
+Die laufende Anwendung ist hier erreichbar:  
+[https://tagebbbuch-levinlb-324-gxdefzhxaxc2angb.canadacentral-01.azurewebsites.net](https://tagebbbuch-levinlb-324-gxdefzhxaxc2angb.canadacentral-01.azurewebsites.net)
+
+
+## Umgebungsvariable setzen (`PASSWORD`)
+Damit der Login funktioniert, muss die geheime Variable `PASSWORD` auf Azure korrekt gesetzt sein.
+
+### Schritt-für-Schritt:
+1. Öffne das Azure-Portal und gehe zu deiner App.
+2. Klicke auf **„Konfiguration“ > „Umgebungsvariablen“**.
+3. Füge eine neue Anwendungseinstellung hinzu:
+   - **Name:** `PASSWORD`
+   - **Wert:** `<dein GitHub-Benutzername>` → z. B. `LevinStauffacher`
+4. Klicke auf **„Speichern“** und starte die App neu.
+
+## 🔁 Automatische Auslieferung (CI/CD)
+Diese Anwendung ist über GitHub Actions mit Azure verbunden. Bei jedem erfolgreichen **Push in den `main`-Branch** wird die App automatisch neu ausgeliefert.
+
+Der Workflow befindet sich in `.github/workflows/main_tagebbbuch-levinLB-324.yml`.
